@@ -91,6 +91,69 @@
                 text-decoration: underline;
             }
 
+            .AspNet-TreeView {
+    width: 200px;
+    border-top: solid 1px #DDD;
+}
+ 
+.AspNet-TreeView ul {
+    list-style: none; 
+}
+ 
+.AspNet-TreeView-Leaf {
+    border-bottom: solid 1px #DDD;
+    background: url(../../images/structure/node-dot.gif) 8px 9px no-repeat;  
+}
+ 
+.AspNet-TreeView-Root {
+    border-bottom: solid 1px #DDD; 
+}
+ 
+.AspNet-TreeView-Root a {
+    display: block;
+    width: 170px;
+    margin-left: 20px;
+    padding: 5px 5px 5px 5px; 
+}
+ 
+.AspNet-TreeView-Selected {
+    background: #F6F6F6 url(../../images/structure/arrow-right.gif) 8px 9px no-repeat;
+}
+ 
+.AspNet-TreeView-Expand {
+    display: block;
+    float: left;
+    margin: 9px 0px 0px 8px;
+    padding: 6px 4px 5px 4px;
+    height: 0px !important;
+    background: url(../../images/structure/node-plus.gif) 0px 0px no-repeat;
+    cursor: pointer;
+}
+ 
+.AspNet-TreeView-Collapse {
+    display: block;
+    float: left;
+    margin: 9px 0px 0px 8px;
+    padding: 6px 4px 5px 4px;
+    height: 0px !important;
+    background: url(../../images/structure/node-minus.gif) 0px 0px no-repeat;
+    cursor: pointer;
+}
+ 
+.AspNet-TreeView-Show li {
+      border-top: solid 1px #DDD;
+      background-position: 28px 9px;
+}
+ 
+.AspNet-TreeView-Hide {
+    display: none;
+}
+ 
+.AspNet-TreeView ul li ul li {
+    text-indent: 20px;
+    border-bottom: none;
+    font-size: 11px;
+}
     </style>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.0/angular.min.js"></script>
 <script type="text/javascript"></script>
@@ -151,7 +214,7 @@
 
     <div class="section">
         <h2>Nextgen >> PM >> </h2>
-
+        <asp:Label ID="treeviewpath" runat="server" />
         <div class="card text-center">
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs">
@@ -163,10 +226,19 @@
         </div>
             <div class="tab-content">
                 <div class="tab-pane active" id="tab_a">
-                <asp:GridView ID="GridView1"  CssClass="table table-striped table-bordered table-hover"
-                    runat="server" AutoGenerateColumns="true" Width="1111px" >
-                </asp:GridView>
-
+                    <asp:GridView ID="grdFunctional"  CssClass="table table-striped table-bordered table-hover"
+                        runat="server" AutoGenerateColumns="true" Width="1111px" >
+                    </asp:GridView>
+                </div>
+                <div class="tab-pane" id="tab_b">
+                    <asp:GridView ID="grdDatabase"  CssClass="table table-striped table-bordered table-hover"
+                        runat="server" AutoGenerateColumns="true" Width="1111px" >
+                    </asp:GridView>
+                </div>
+                <div class="tab-pane" id="tab_c">
+                    <asp:GridView ID="grdOtherDetails"  CssClass="table table-striped table-bordered table-hover"
+                        runat="server" AutoGenerateColumns="true" Width="1111px" >
+                    </asp:GridView>
                 </div>
             </div>
  

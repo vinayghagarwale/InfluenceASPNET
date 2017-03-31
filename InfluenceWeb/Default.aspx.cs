@@ -12,6 +12,8 @@ namespace InfluenceWeb
         private readonly string strXMLFileName = @"C:\ImpactAnalysisFile\NextGenImpact.xml";
 
         FunctionalDetailss lstFunctionalDetails = new FunctionalDetailss();
+        DatabaseDetailsList lstDataBaseDetails = new DatabaseDetailsList();
+        OtherDetailsList lstOtherDetails = new OtherDetailsList();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -31,9 +33,19 @@ namespace InfluenceWeb
             {
                 if (node.Attributes["name"].Value == TreeView1.SelectedValue)
                 {
+                    treeviewpath.Text = TreeView1.SelectedValue;
                     BuildFunctionalDetails(node);
-                    GridView1.DataSource = lstFunctionalDetails;
-                    GridView1.DataBind();
+                    grdFunctional.DataSource = lstFunctionalDetails;
+                    grdFunctional.DataBind();
+
+                    BuildDatabaseDetails(node);
+                    grdDatabase.DataSource = lstDataBaseDetails;
+                    grdDatabase.DataBind();
+
+                    BuildOtherDetails(node);
+                    grdOtherDetails.DataSource = lstOtherDetails;
+                    grdOtherDetails.DataBind();
+
                     break;
                 }
             }
@@ -41,6 +53,7 @@ namespace InfluenceWeb
 
         private void BuildFunctionalDetails(XmlNode xmlnode)
         {
+            lstFunctionalDetails.Clear();
             foreach (XmlNode xmln in xmlnode.ChildNodes)
             {
                 if (xmln.Name == "Functional")
@@ -51,6 +64,37 @@ namespace InfluenceWeb
                     f.ModuleName = xmln.Attributes["Module"].Value;
                     f.Complexity = xmln.Attributes["Complexity"].Value;
                     lstFunctionalDetails.Add(f);
+                }
+            }
+        }
+        private void BuildDatabaseDetails(XmlNode xmlnode)
+        {
+            lstDataBaseDetails.Clear();
+            foreach (XmlNode xmln in xmlnode.ChildNodes)
+            {
+                if (xmln.Name == "Database")
+                {
+                    DataBaseDetails f = new DataBaseDetails();
+                    f.Description = xmln.Attributes[0].Value;
+                    f.Typename = xmln.Attributes[1].Value;
+                    f.Type = xmln.Attributes[2].Value;
+                    lstDataBaseDetails.Add(f);
+                }
+            }
+        }
+        private void BuildOtherDetails(XmlNode xmlnode)
+        {
+            lstOtherDetails.Clear();
+            foreach (XmlNode xmln in xmlnode.ChildNodes)
+            {
+                if (xmln.Name == "OtherDetails")
+                {
+                    OtherDetails f = new OtherDetails();
+                    f.Description = xmln.Attributes[0].Value;
+                    f.Type = xmln.Attributes[1].Value;
+                    f.Module = xmln.Attributes[2].Value;
+                    f.Complexity = xmln.Attributes[3].Value;
+                    lstOtherDetails.Add(f);
                 }
             }
         }
