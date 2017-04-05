@@ -14,18 +14,21 @@ namespace InfluenceWeb
         FunctionalDetailss lstFunctionalDetails = new FunctionalDetailss();
         DatabaseDetailsList lstDataBaseDetails = new DatabaseDetailsList();
         OtherDetailsList lstOtherDetails = new OtherDetailsList();
+        XmlDocument xmlDoc;
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            xmlDoc = new XmlDocument();
+            xmlDoc.Load(strXMLFileName);
+            //XmlElement root = xmlDoc.DocumentElement;
+            //XmlNodeList nodes = root.SelectNodes("//Node");
+            //TreeView1.DataSource = nodes;
         }
 
 
         protected void TreeView1_SelectedNodeChanged(object sender, EventArgs e)
         {
-            XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.Load(strXMLFileName);
-            
             XmlElement root = xmlDoc.DocumentElement;
             XmlNodeList nodes = root.SelectNodes("//Node");
 
@@ -96,6 +99,66 @@ namespace InfluenceWeb
                     f.Complexity = xmln.Attributes[3].Value;
                     lstOtherDetails.Add(f);
                 }
+            }
+        }
+
+        protected void Unnamed1_TextChanged(object sender, EventArgs e)
+        {
+            searchResults();
+        }
+
+        private void searchResults()
+        {
+            XmlElement root = xmlDoc.DocumentElement;
+            XmlNodeList nodes = root.SelectNodes("//Node");
+
+            if (txtSearch.Text.Length > 0)
+            {
+                XmlNode xmlnode = (XmlNode)root;
+                List<SearchList> lstitems = new List<SearchList>();
+                SearchItemsintreeview(xmlnode, lstitems, txtSearch.Text);
+                lstsearchresult.Items.Clear();
+                foreach (SearchList lst in lstitems)
+                {
+                    lstsearchresult.Items.Add(lst.NodeName);
+                }
+               
+                //lstsearchresult.DataSource = lstitems;
+                // TabResult.Focus();
+            }
+        }
+
+        private void SearchItemsintreeview(System.Xml.XmlNode node, List<SearchList> lstitems, string searchtext)
+        {
+
+            try
+            {
+
+                if (node.ChildNodes.Count == 0)
+                {
+                    string strNodevalue = node.Attributes[0].Value.ToUpper();
+                    if (strNodevalue.Contains(searchtext.ToUpper()))
+                        lstitems.Add(new SearchList(false, node.Attributes[0].Value, node));
+
+                }
+                else
+                {
+                    if (node.Attributes.Count > 0)
+                    {
+                        string strNodevalue = node.Attributes[0].Value.ToUpper();
+                        if (strNodevalue.Contains(searchtext.ToUpper()))
+                            lstitems.Add(new SearchList(false, node.Attributes[0].Value, node));
+                    }
+                    foreach (XmlNode xmlchildnode in node.ChildNodes)
+                    {
+                        SearchItemsintreeview(xmlchildnode, lstitems, searchtext);
+                    }
+                }
+
+            }
+            catch (Exception e)
+            {
+
             }
         }
     }

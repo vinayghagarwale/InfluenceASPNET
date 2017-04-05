@@ -77,9 +77,9 @@
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />
-<%--            <footer>
+            <footer>
                 <p>&copy; <%: DateTime.Now.Year %> - NextGen Inc.</p>
-            </footer>--%>
+            </footer>
         </div>
     </form>
 </body>

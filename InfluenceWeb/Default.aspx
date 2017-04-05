@@ -156,7 +156,7 @@
 }
     </style>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.0/angular.min.js"></script>
-<script type="text/javascript"></script>
+    <script type="text/javascript"></script>
 <div class="container">
 <nav class="navbar navbar-light" style="background-color: #ffffff;">
     <div class="navbar-header">
@@ -204,20 +204,54 @@
 
 <div id="main">
     <div class="section first">
-        <asp:TextBox runat ="server" Width="209px" ></asp:TextBox>
-        <asp:TreeView ID="TreeView1" runat="server" DataSourceID="Xmldatasource1" ShowLines="true" ExpandDepth="1" OnSelectedNodeChanged="TreeView1_SelectedNodeChanged">
-        <DataBindings>
-        <asp:TreeNodeBinding DataMember="node" TextField="Name" ValueField="Name" />
-        </DataBindings>
-        </asp:TreeView>	
-    </div>
 
-    <div class="section">
-        <h2>Nextgen >> PM >> </h2>
-        <asp:Label ID="treeviewpath" runat="server" />
+        <asp:TextBox ID="txtSearch" runat ="server" Width="201px" height="30" OnTextChanged="Unnamed1_TextChanged" ></asp:TextBox>
+        <button type="button" class="btn btn-default my-2 my-sm-0" width="30" height="30">
+            <span class="glyphicon glyphicon-search" tooltip = "Refresh"></span>
+		</button>
+        <button type="button" class="btn btn-default my-2 my-sm-0" width="30" height="30">
+            <span class="glyphicon glyphicon-remove" tooltip = "Refresh"></span>
+		</button>
+
         <div class="card text-center">
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs">
+                    <li class="active">
+                        <a href="#tab_list" data-toggle="tab" style="background-color: #e3f2fd;" >
+                            <span class="glyphicon glyphicon-th-list" tooltip = "List"></span>
+                        </a>
+                    </li>
+                    <li><a href="#tab_Result" data-toggle="tab" style="background-color: #e3f2fd;" >
+                        <span class="glyphicon glyphicon-list-alt" tooltip = "Search Results"></span>
+                        </a></li>
+                    <li><a href="#tab_Export" data-toggle="tab" style="background-color: #e3f2fd;" >
+                        <span class="glyphicon glyphicon-share" tooltip = "Multiple Export List"></span>
+                        </a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="tab-content">
+            <div class="tab-pane active" id="tab_list">
+                <asp:TreeView ID="TreeView1" runat="server" DataSourceID="Xmldatasource1" ShowLines="true" ExpandDepth="1" OnSelectedNodeChanged="TreeView1_SelectedNodeChanged">
+                <DataBindings>
+                <asp:TreeNodeBinding DataMember="node" TextField="Name" ValueField="Name" />
+                </DataBindings>
+                </asp:TreeView>	
+            </div>
+            <div class="tab-pane" id="tab_Result">
+                Show Search result here..
+                <asp:ListBox ID ="lstsearchresult" runat="server"/>
+            </div>
+            <div class="tab-pane" id="tab_Export">
+                Show Export result here..
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <asp:Label ID="treeviewpath" runat="server" />
+        <div class="card text-center">
+            <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs ">
                 <li class="active"><a href="#tab_a" data-toggle="tab" style="background-color: #e3f2fd;" >Functional</a></li>
                 <li><a href="#tab_b" data-toggle="tab" style="background-color: #e3f2fd;" >Database</a></li>
                 <li><a href="#tab_c" data-toggle="tab" style="background-color: #e3f2fd;" >Other Details</a></li>
@@ -244,4 +278,5 @@
  
     </div>
 </div>
+    </div>
 </asp:Content>

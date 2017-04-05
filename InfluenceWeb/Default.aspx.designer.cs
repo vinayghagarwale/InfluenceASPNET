@@ -22,6 +22,15 @@ namespace InfluenceWeb {
         protected global::System.Web.UI.WebControls.XmlDataSource Xmldatasource1;
         
         /// <summary>
+        /// txtSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSearch;
+        
+        /// <summary>
         /// TreeView1 control.
         /// </summary>
         /// <remarks>
@@ -29,6 +38,15 @@ namespace InfluenceWeb {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TreeView TreeView1;
+        
+        /// <summary>
+        /// lstsearchresult control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListBox lstsearchresult;
         
         /// <summary>
         /// treeviewpath control.
